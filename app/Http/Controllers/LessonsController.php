@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Lesson;
 
+use App\Http\Controllers\Controller;
+
 class LessonsController extends Controller
 {
   public function index() 
@@ -14,8 +16,7 @@ class LessonsController extends Controller
     return response()->json(
       [
         'data' => $this->transformCollection($lessons)
-      ], 
-      200
+      ]
     );
   }
 
@@ -23,19 +24,12 @@ class LessonsController extends Controller
   {
     $lesson = Lesson::find($id);
     if (!$lesson) {
-      return response()->json(
-        [
-          'error' => [
-            'message' => 'resource not found.'
-          ]
-        ]
-      , 404);
+      /**
+       * @todo respondeNoteFound located in BaseController. Always abstract resuables into base classes for better maintainability
+       */
+      return $this->respondNotFound('Resource Not Found');
     } else {
-      return response()->json(
-        [
-          'data' => $this->transform($lesson)
-        ]
-      , 200);
+      return $this->respond($this->transform($lesson));
     }
   }
 
