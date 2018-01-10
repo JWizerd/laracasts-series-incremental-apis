@@ -18,6 +18,7 @@ class Controller extends BaseController
 
       $this->status_code = $status_code;
 
+      // it's critical when chaining php object methods to return the the object at the end of the function or you'll get a fatal error: Call to a member function respond() on null
       return $this;
 
     }
@@ -53,7 +54,7 @@ class Controller extends BaseController
           ]
         ]
       );
-      
+
     }
 
     /**

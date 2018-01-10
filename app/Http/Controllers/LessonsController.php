@@ -29,6 +29,7 @@ class LessonsController extends Controller
        */
       return $this->respondNotFound('Resource Not Found');
     } else {
+      // notice how now we have response()->json() extracted to the base controller and instead we use the respond object to handle not only successful requests but bad request as well in that case we show our custom created error messages.
       return $this->respond($this->transform($lesson));
     }
   }
